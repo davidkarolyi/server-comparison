@@ -10,12 +10,10 @@ import (
 )
 
 func main() {
-	secret := readTestData().Secret
-
 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		token := readTestData().Token
+		testData := readTestData()
 
-		payload := verifyToken(token, secret)
+		payload := verifyToken(testData.Token, testData.Secret)
 		marshaledPayload, _ := json.Marshal(payload)
 
 		res.Header().Add("Content-Type", "application/json")
