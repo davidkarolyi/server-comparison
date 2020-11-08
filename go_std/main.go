@@ -24,13 +24,13 @@ func main() {
 	http.ListenAndServe(":3000", nil)
 }
 
-func readTestData() TestData {
+func readTestData() *TestData {
 	jsonTestData, _ := ioutil.ReadFile("../test_data.json")
 
 	testData := TestData{}
 	json.Unmarshal(jsonTestData, &testData)
 
-	return testData
+	return &testData
 }
 
 func verifyToken(token string, secret string) Payload {

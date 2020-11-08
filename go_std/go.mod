@@ -1,4 +1,4 @@
-module github.com/davidkarolyi/server-comparison
+module github.com/davidkarolyi/server-comparison/go_std
 
 go 1.15
 
