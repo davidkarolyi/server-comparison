@@ -1,2 +1,3 @@
 node_express/node_modules
+node_fastify/node_modules
 rust_actix/target
