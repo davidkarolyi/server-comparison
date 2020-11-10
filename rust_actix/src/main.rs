@@ -8,7 +8,7 @@ use std::fs;
 async fn main() -> std::io::Result<()> {
   println!("rust_actix is listening on localhost:3000");
   HttpServer::new(|| App::new().service(web::resource("/").to(handler)))
-    .bind("127.0.0.1:3000")?
+    .bind("0.0.0.0:3000")?
     .run()
     .await
 }

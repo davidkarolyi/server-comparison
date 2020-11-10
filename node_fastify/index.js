@@ -10,11 +10,9 @@ fastify.get("/", async (request, reply) => {
   return payload;
 });
 
-const start = async () => {
-  await fastify.listen(3000);
+fastify.listen(3000, "0.0.0.0", () => {
   console.log(`node_fastify is listening on localhost:3000`);
-};
-start();
+});
 
 async function readToken() {
   const tokenString = await fs.promises.readFile(
