@@ -66,5 +66,13 @@ func init() {
 		"Benchmark param: record a timeout if a response is not received within this amount of time",
 	)
 
+	runBenchmarksCmd.Flags().BoolVarP(
+		&options.SkipBuild,
+		"skip-build",
+		"B",
+		false,
+		"Prevents benchmarks from building new docker images",
+	)
+
 	rootCmd.AddCommand(runWRKServerCmd, runBenchmarksCmd)
 }

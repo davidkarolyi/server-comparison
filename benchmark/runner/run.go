@@ -21,9 +21,13 @@ func RunBenchmarks(options *Options) error {
 	}
 	fmt.Printf("🚦 Servers waiting for benchmark:\n%s\n", jobs)
 
-	err = buildContainers(jobs)
-	if err != nil {
-		return err
+	if options.SkipBuild {
+		skipBuilds(jobs)
+	} else {
+		err = buildContainers(jobs)
+		if err != nil {
+			return err
+		}
 	}
 
 	err = runJobs(jobs)
@@ -48,6 +52,13 @@ func buildContainers(jobs *jobList) error {
 		}
 	}
 	return nil
+}
+
+func skipBuilds(jobs *jobList) {
+	for _, job := range *jobs {
+		fmt.Printf("⏩ Skipping build process of %s...\n", job.ServerName())
+		job.SkipBuild()
+	}
 }
 
 func runJobs(jobs *jobList) error {

@@ -9,6 +9,7 @@ import (
 var options = &runner.Options{
 	WRKHostURL:      "",
 	BenchmarkParams: &types.BenchmarkParams{},
+	SkipBuild:       false,
 }
 
 var runBenchmarksCmd = &cobra.Command{
