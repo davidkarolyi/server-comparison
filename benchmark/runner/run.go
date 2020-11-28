@@ -2,15 +2,15 @@ package runner
 
 import (
 	"fmt"
-	"os"
 	"time"
 
-	"github.com/davidkarolyi/server-comparison/benchmark/report"
+	"github.com/davidkarolyi/server-comparison/benchmark/utils"
 )
 
 // RunBenchmarks will run all server benchmarks, with the help of a remote wrk host.
 func RunBenchmarks(options *Options) error {
-	err := os.Chdir("..")
+
+	err := utils.ChangeToProjectRoot()
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func saveResults(jobs *jobList) error {
 			return err
 		}
 		fileName := fmt.Sprintf("%s.json", job.ServerName())
-		report.SaveAsJSON(dirPath+fileName, result)
+		utils.SaveAsJSON(dirPath+fileName, result)
 	}
 	return nil
 }
