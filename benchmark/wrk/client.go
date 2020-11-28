@@ -11,18 +11,6 @@ import (
 	"github.com/davidkarolyi/server-comparison/benchmark/wrk/types"
 )
 
-// DefaultParamsWithTargetURL will return default benchmarking parameters with the given target URL.
-// Defaults: duration=10s, threads=2, connections=10, timeout=2s.
-func DefaultParamsWithTargetURL(targetURL string) *types.BenchmarkParams {
-	return &types.BenchmarkParams{
-		TargetURL:   targetURL,
-		Duration:    "10s",
-		Threads:     2,
-		Connections: 10,
-		Timeout:     "2s",
-	}
-}
-
 // Client is an HTTP cient for the wrk server.
 type Client struct {
 	wrkHostURL      string

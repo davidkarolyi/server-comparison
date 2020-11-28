@@ -8,19 +8,20 @@ import (
 
 	"github.com/davidkarolyi/server-comparison/benchmark/job"
 	"github.com/davidkarolyi/server-comparison/benchmark/wrk"
+	"github.com/davidkarolyi/server-comparison/benchmark/wrk/types"
 )
 
 // jobList is a list of benchmark jobs
 type jobList []*job.BenchmarkJob
 
 // newJobList will create a job list from server directories found in the project root.
-func newJobList(localHostURL string, wrkHostURL string) (*jobList, error) {
+func newJobList(wrkHostURL string, benchmarkParams *types.BenchmarkParams) (*jobList, error) {
 	files, err := ioutil.ReadDir("./")
 	if err != nil {
 		return nil, err
 	}
 
-	wrkClient := wrk.NewClient(wrkHostURL, wrk.DefaultParamsWithTargetURL(localHostURL))
+	wrkClient := wrk.NewClient(wrkHostURL, benchmarkParams)
 	err = wrkClient.CheckConnection()
 	if err != nil {
 		return nil, err
