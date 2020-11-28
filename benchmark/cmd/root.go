@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{Use: "benchmark"}
+var rootCmd = &cobra.Command{Use: "bmark"}
 
 // Execute runs the constructed cobra rootCommand
 func Execute() {
@@ -18,7 +18,7 @@ func Execute() {
 
 func init() {
 	runBenchmarksCmd.Flags().StringVarP(
-		&wrkHostURL,
+		&options.WRKHostURL,
 		"remote-url",
 		"r",
 		"",
@@ -27,7 +27,7 @@ func init() {
 	runBenchmarksCmd.MarkFlagRequired("remote-url")
 
 	runBenchmarksCmd.Flags().StringVarP(
-		&(benchmarkParams.TargetURL),
+		&options.BenchmarkParams.TargetURL,
 		"local-url",
 		"l",
 		"",
@@ -36,7 +36,7 @@ func init() {
 	runBenchmarksCmd.MarkFlagRequired("local-url")
 
 	runBenchmarksCmd.Flags().IntVarP(
-		&(benchmarkParams.Connections),
+		&options.BenchmarkParams.Connections,
 		"connections",
 		"c",
 		10,
@@ -44,7 +44,7 @@ func init() {
 	)
 
 	runBenchmarksCmd.Flags().IntVarP(
-		&(benchmarkParams.Threads),
+		&options.BenchmarkParams.Threads,
 		"threads",
 		"t",
 		2,
@@ -52,7 +52,7 @@ func init() {
 	)
 
 	runBenchmarksCmd.Flags().StringVarP(
-		&(benchmarkParams.Duration),
+		&options.BenchmarkParams.Duration,
 		"duration",
 		"d",
 		"10s",
@@ -60,7 +60,7 @@ func init() {
 	)
 
 	runBenchmarksCmd.Flags().StringVar(
-		&(benchmarkParams.Timeout),
+		&options.BenchmarkParams.Timeout,
 		"timeout",
 		"2s",
 		"Benchmark param: record a timeout if a response is not received within this amount of time",

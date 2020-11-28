@@ -6,17 +6,16 @@ import (
 	"time"
 
 	"github.com/davidkarolyi/server-comparison/benchmark/report"
-	"github.com/davidkarolyi/server-comparison/benchmark/wrk/types"
 )
 
 // RunBenchmarks will run all server benchmarks, with the help of a remote wrk host.
-func RunBenchmarks(wrkHostURL string, benchmarkParams *types.BenchmarkParams) error {
+func RunBenchmarks(options *Options) error {
 	err := os.Chdir("..")
 	if err != nil {
 		return err
 	}
 
-	jobs, err := newJobList(wrkHostURL, benchmarkParams)
+	jobs, err := newJobList(options)
 	if err != nil {
 		return err
 	}
