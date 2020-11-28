@@ -64,7 +64,7 @@ func runJobs(jobs *jobList) error {
 func saveResults(jobs *jobList) error {
 	dirPath := fmt.Sprintf(
 		"./reports/%s/_raw/",
-		time.Now().Format("2006-01-02"),
+		time.Now().Format(time.RFC3339),
 	)
 	fmt.Printf("📀 Saving results to '%s'", dirPath)
 	for _, job := range *jobs {
