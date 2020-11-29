@@ -4,11 +4,9 @@ WORKDIR /usr/src/app
 COPY ./test_data.json .
 
 WORKDIR /usr/src/app/node_express
-COPY ./node_express/package*.json .
+COPY ./node_express/ .
 
 RUN npm install
-
-COPY ./node_express/index.js .
 
 EXPOSE 3000
 

@@ -1,10 +1,4 @@
 {
-  "steps": [
-    "On each request read this file into memory",
-    "Unmarshal the JSON to be able to extract 'token' and 'secret' fields'",
-    "Verify the JWT 'token' with the 'secret'",
-    "Send back the JWT's payload as JSON"
-  ],
   "secret": "YeoK04epwBZvp0FtLHB0pLxywVP0fxUjL2NtK8TmQKu73KrucwVz4IvVqoQwhuG3eOCFddT0mkEqiJGb3+m1K+jKzoUMIdan4kcy9Qpm/brUehQz8UxlohoC2/hlC17d+1kLcjNyIJCqgghlYFsoFkexrcYaKX9IcthcngtaAUWAwrDljIP99g5OWPui7cdlhuzNRKIy+nE59aUrfO9/DjXuuUMlSn9zw6mY8PAd6tWHPSdkUMrPf42gfVsfSFtfS3u+gv/qiasMVjT4UyovJnIky0MZs9Mz+syY+6kMAfp6S0qr47igJan1wbkG8K5z0f3qA0GwCAWV1bOtJYAC9Q==",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJhc2RmLWFzZHd3LWFzZGRkLTEyZDRqIiwicm9sZSI6ImFkbWluIiwiYWdlIjoyNCwiaWF0IjoxNjA0ODI1NDg5fQ.6XPTFFjz0QRnRWnEpV3itC22lSQJ25TpY--Ly9GujcY"
 }
