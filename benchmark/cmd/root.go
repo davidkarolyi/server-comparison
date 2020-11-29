@@ -39,7 +39,7 @@ func init() {
 		&options.BenchmarkParams.Connections,
 		"connections",
 		"c",
-		10,
+		20,
 		"Benchmark param: total number of HTTP connections to keep open",
 	)
 
@@ -55,7 +55,7 @@ func init() {
 		&options.BenchmarkParams.Duration,
 		"duration",
 		"d",
-		"10s",
+		"15s",
 		"Benchmark param: duration of the test, e.g. 2s, 2m, 2h",
 	)
 
