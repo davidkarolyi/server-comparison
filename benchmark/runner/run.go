@@ -9,12 +9,6 @@ import (
 
 // RunBenchmarks will run all server benchmarks, with the help of a remote wrk host.
 func RunBenchmarks(options *Options) error {
-
-	err := utils.ChangeToProjectRoot()
-	if err != nil {
-		return err
-	}
-
 	jobs, err := newJobList(options)
 	if err != nil {
 		return err
@@ -39,7 +33,7 @@ func RunBenchmarks(options *Options) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Println("✅ Done")
 	return nil
 }
 
@@ -71,7 +65,7 @@ func runJobs(jobs *jobList) error {
 
 func saveResults(jobs *jobList) error {
 	dirPath := fmt.Sprintf(
-		"./reports/%s/_raw/",
+		"./reports/%s/measurements/",
 		time.Now().Format(time.RFC3339),
 	)
 	fmt.Printf("📀 Saving results to '%s'\n", dirPath)

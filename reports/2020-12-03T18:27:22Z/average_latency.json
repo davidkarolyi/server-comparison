@@ -1,0 +1,7 @@
+{
+  "go_fasthttp": 9.06,
+  "go_std": 11,
+  "node_express": 57.85,
+  "node_fastify": 25.5,
+  "rust_actix": 7.53
+}

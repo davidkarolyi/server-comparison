@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var runWRKServerCmd = &cobra.Command{
+var wrkCmd = &cobra.Command{
 	Use:   "wrk",
 	Short: "Start wrk server",
 	Long:  "Runs a server which is able to run a wrk benchmark against remote URL",

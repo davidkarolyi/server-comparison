@@ -2,11 +2,10 @@ package runner
 
 import (
 	"fmt"
-	"io/ioutil"
-	"os"
 	"strings"
 
 	"github.com/davidkarolyi/server-comparison/benchmark/job"
+	"github.com/davidkarolyi/server-comparison/benchmark/utils"
 	"github.com/davidkarolyi/server-comparison/benchmark/wrk"
 )
 
@@ -15,7 +14,7 @@ type jobList []*job.BenchmarkJob
 
 // newJobList will create a job list from server directories found in the project root.
 func newJobList(options *Options) (*jobList, error) {
-	files, err := ioutil.ReadDir("./")
+	_, dirNames, err := utils.ListDirContent("./")
 	if err != nil {
 		return nil, err
 	}
@@ -27,9 +26,9 @@ func newJobList(options *Options) (*jobList, error) {
 	}
 
 	jobs := &jobList{}
-	for _, file := range files {
-		if isServerDir(file) {
-			runner, err := job.New(file.Name(), wrkClient)
+	for _, dirName := range dirNames {
+		if isServerDir(dirName) {
+			runner, err := job.New(dirName, wrkClient)
 			if err != nil {
 				return nil, err
 			}
@@ -51,14 +50,14 @@ func (jobs *jobList) push(runner *job.BenchmarkJob) {
 	*jobs = append(*jobs, runner)
 }
 
-func isServerDir(file os.FileInfo) bool {
-	return file.IsDir() && !isHiddenDir(file) && hasUnderscoreInName(file)
+func isServerDir(dirName string) bool {
+	return !isHiddenDir(dirName) && hasUnderscoreInName(dirName)
 }
 
-func isHiddenDir(file os.FileInfo) bool {
-	return strings.HasPrefix(file.Name(), ".")
+func isHiddenDir(dirName string) bool {
+	return strings.HasPrefix(dirName, ".")
 }
 
-func hasUnderscoreInName(file os.FileInfo) bool {
-	return strings.Contains(file.Name(), "_")
+func hasUnderscoreInName(dirName string) bool {
+	return strings.Contains(dirName, "_")
 }

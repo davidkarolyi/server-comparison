@@ -2,29 +2,11 @@ package utils
 
 import (
 	"bytes"
-	"encoding/json"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strings"
 )
-
-// SaveAsJSON saves a struct as a json file to the given path.
-// If the path doesn't exists creates it.
-func SaveAsJSON(path string, v interface{}) error {
-	err := os.MkdirAll(filepath.Dir(path), os.ModePerm)
-	if err != nil {
-		return err
-	}
-
-	asJSON, err := json.MarshalIndent(v, "", "  ")
-	if err != nil {
-		return err
-	}
-
-	return ioutil.WriteFile(path, asJSON, 0644)
-}
 
 // ChangeToProjectRoot will set the working directory to the project's root if it's exists.
 func ChangeToProjectRoot() error {
@@ -49,4 +31,23 @@ func ProjectRoot() (string, error) {
 	}
 
 	return strings.TrimSpace(path.String()), nil
+}
+
+// ListDirContent returns a list of files and a list of directory names
+// located in the given path.
+func ListDirContent(path string) (fileNames []string, dirNames []string, err error) {
+	filesAndDirs, err := ioutil.ReadDir(path)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	for _, fileOrDir := range filesAndDirs {
+		if fileOrDir.IsDir() {
+			dirNames = append(dirNames, fileOrDir.Name())
+		} else {
+			fileNames = append(fileNames, fileOrDir.Name())
+		}
+	}
+
+	return fileNames, dirNames, nil
 }

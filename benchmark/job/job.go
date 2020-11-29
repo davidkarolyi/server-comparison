@@ -69,7 +69,7 @@ func (job *BenchmarkJob) BuildImages() error {
 	}
 	job.state = StateBuildingImage
 
-	fmt.Printf("🏗 Building image for %s...\n", job.ServerName())
+	fmt.Printf("🏗 Building image for %s\n", job.ServerName())
 	err := job.docker.BuildServerImage()
 	if err != nil {
 		return fmt.Errorf("Cannot build image for %s: %s", job.serverName, err)
@@ -82,7 +82,7 @@ func (job *BenchmarkJob) BuildImages() error {
 // SkipBuild will skip the build step for this job
 func (job *BenchmarkJob) SkipBuild() {
 	if job.state == StateCreated {
-		fmt.Printf("⏩ Skipping build process of %s...\n", job.ServerName())
+		fmt.Printf("⏩ Skipping build process of %s\n", job.ServerName())
 		job.state = StateReadyToRun
 	}
 }
@@ -96,7 +96,7 @@ func (job *BenchmarkJob) Run() error {
 	job.state = StateRunning
 	defer job.terminate()
 
-	fmt.Printf("⏱ Starting conatiner for %s...\n", job.ServerName())
+	fmt.Printf("⏱ Starting conatiner for %s\n", job.ServerName())
 	statsChannel, err := job.docker.StartServerContainer()
 	if err != nil {
 		return err
@@ -107,7 +107,7 @@ func (job *BenchmarkJob) Run() error {
 		return err
 	}
 
-	fmt.Println("🧘‍♀️ Waiting 5 seconds to make sure the server is in an idle state...")
+	fmt.Println("🧘‍♀️ Waiting 5 seconds to make sure the server is in an idle state")
 	time.Sleep(5 * time.Second)
 
 	err = job.statsRecorder.Record()
@@ -115,7 +115,7 @@ func (job *BenchmarkJob) Run() error {
 		return err
 	}
 
-	fmt.Println("🚀 Running wrk benchmark...")
+	fmt.Println("🚀 Running wrk benchmark")
 	wrkResult, err := job.wrkClient.RunBenchmark()
 	if err != nil {
 		return err
@@ -152,7 +152,7 @@ func (job *BenchmarkJob) setupGracefullShutdown() {
 }
 
 func (job *BenchmarkJob) terminate() {
-	fmt.Println("✨ Cleaning up running containers...")
+	fmt.Println("✨ Cleaning up running containers")
 	job.docker.Clean()
 	job.cleanedUpSignal <- struct{}{}
 }
