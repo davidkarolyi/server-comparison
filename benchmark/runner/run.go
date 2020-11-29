@@ -45,7 +45,6 @@ func RunBenchmarks(options *Options) error {
 
 func buildContainers(jobs *jobList) error {
 	for _, job := range *jobs {
-		fmt.Printf("🏗 Building image for %s...\n", job.ServerName())
 		err := job.BuildImages()
 		if err != nil {
 			return err
@@ -56,14 +55,12 @@ func buildContainers(jobs *jobList) error {
 
 func skipBuilds(jobs *jobList) {
 	for _, job := range *jobs {
-		fmt.Printf("⏩ Skipping build process of %s...\n", job.ServerName())
 		job.SkipBuild()
 	}
 }
 
 func runJobs(jobs *jobList) error {
 	for _, job := range *jobs {
-		fmt.Printf("⏱ Benchmarking %s...\n", job.ServerName())
 		err := job.Run()
 		if err != nil {
 			return err
@@ -77,7 +74,7 @@ func saveResults(jobs *jobList) error {
 		"./reports/%s/_raw/",
 		time.Now().Format(time.RFC3339),
 	)
-	fmt.Printf("📀 Saving results to '%s'", dirPath)
+	fmt.Printf("📀 Saving results to '%s'\n", dirPath)
 	for _, job := range *jobs {
 		result, err := job.Result()
 		if err != nil {
